@@ -41,6 +41,9 @@
   (should (equal (f-join "/path" "to" "file") "/path/to/file"))
   (should (equal (f-join "/" "path" "to" "file") "/path/to/file")))
 
+(ert-deftest f-join-test/directory ()
+  (should (equal (f-join "path" "to" "file/") "path/to/file/")))
+
 (ert-deftest f-join-test/root ()
   (should (equal (f-join "/") "/")))
 
@@ -62,6 +65,10 @@
 (ert-deftest f-split-test/inverse-of-join ()
   (should (equal (f-split (apply 'f-join (f-split "/path/to/file")))
                  '("/" "path" "to" "file"))))
+
+(ert-deftest f-split-test/not-inverse-of-join ()
+  (should (not (equal (f-split (apply 'f-join (f-split "/path/to/file/")))
+                      '("/" "path" "to" "file/")))))
 
 (ert-deftest f-split-test/root ()
   (should (equal (f-split "/") '("/"))))
