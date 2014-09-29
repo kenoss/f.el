@@ -63,7 +63,7 @@ If PATH is not allowed to be modified, throw error."
   (let (path (relative (f-relative? (car args))))
     (-map
      (lambda (arg)
-       (setq path (f-expand arg path)))
+       (setq path (expand-file-name arg path)))
      args)
     (if relative (f-relative path) path)))
 
